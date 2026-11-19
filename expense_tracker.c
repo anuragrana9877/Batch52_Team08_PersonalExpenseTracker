@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 
@@ -65,7 +66,6 @@ int main()
                 }
                 break;
 
-
             // ADD EXPENSE
             case 2:
                 if(count >= MAX)
@@ -107,8 +107,7 @@ int main()
                 }
                 break;
 
-
-            // VIEW ALL
+            // VIEW ALL EXPENSES
             case 3:
                 if(count == 0)
                 {
@@ -129,8 +128,7 @@ int main()
                 }
                 break;
 
-
-            // TOTAL EXPENSE
+            // TOTAL EXPENSES
             case 4:
             {
                 float total = 0;
@@ -141,7 +139,6 @@ int main()
                 printf("Total Expenses: Rs. %.2f\n", total);
                 break;
             }
-
 
             // CATEGORY REPORT
             case 5:
@@ -174,7 +171,6 @@ int main()
                 break;
             }
 
-
             // REMAINING BUDGET
             case 6:
             {
@@ -199,7 +195,7 @@ int main()
                 printf("Spent: Rs. %.2f\n", spent);
 
                 if(spent > budget)
-                    printf("Budget exceeded by Rs. %.2f\n",
+                    printf("WARNING! Budget exceeded by Rs. %.2f\n",
                            spent - budget);
                 else
                     printf("Remaining: Rs. %.2f\n",
@@ -207,7 +203,6 @@ int main()
 
                 break;
             }
-
 
             // MONTHLY REPORT
             case 7:
@@ -221,6 +216,12 @@ int main()
 
                 printf("Enter year: ");
                 scanf("%d", &y);
+
+                if(m < 1 || m > 12 || y < 2000 || y > 2100)
+                {
+                    printf("Invalid month or year!\n");
+                    break;
+                }
 
                 for(i = 0; i < count; i++)
                 {
@@ -247,13 +248,15 @@ int main()
                 if(total > 0)
                     printf("Highest Category: %s\n",
                            categoryNames[highest]);
+                else
+                    printf("No expenses recorded for this month.\n");
 
                 if(budgetSet &&
                    m == budgetMonth &&
                    y == budgetYear)
                 {
                     if(total > budget)
-                        printf("Budget exceeded by Rs. %.2f\n",
+                        printf("WARNING! Budget exceeded by Rs. %.2f\n",
                                total - budget);
                     else
                         printf("Remaining Budget: Rs. %.2f\n",
@@ -262,7 +265,6 @@ int main()
 
                 break;
             }
-
 
             // EDIT EXPENSE
             case 8:
@@ -287,25 +289,44 @@ int main()
 
                 i = n - 1;
 
-                printf("Enter new description: ");
-                scanf(" %49[^\n]", description[i]);
+                {
+                    char newDescription[50];
+                    int newMonth, newYear;
+                    float newAmount;
 
-                printf("Enter new month: ");
-                scanf("%d", &month[i]);
+                    printf("Enter new description: ");
+                    scanf(" %49[^\n]", newDescription);
 
-                printf("Enter new year: ");
-                scanf("%d", &year[i]);
+                    printf("Enter new month: ");
+                    scanf("%d", &newMonth);
 
-                printf("Enter category (1-4): ");
-                scanf("%d", &c);
-                category[i] = c - 1;
+                    printf("Enter new year: ");
+                    scanf("%d", &newYear);
 
-                printf("Enter new amount: Rs. ");
-                scanf("%f", &amount[i]);
+                    printf("Enter category (1-4): ");
+                    scanf("%d", &c);
 
-                printf("Expense updated successfully!\n");
+                    printf("Enter new amount: Rs. ");
+                    scanf("%f", &newAmount);
+
+                    if(newMonth < 1 || newMonth > 12 ||
+                       newYear < 2000 || newYear > 2100 ||
+                       c < 1 || c > 4 || newAmount <= 0)
+                    {
+                        printf("Invalid expense details! Update cancelled.\n");
+                    }
+                    else
+                    {
+                        strcpy(description[i], newDescription);
+                        month[i] = newMonth;
+                        year[i] = newYear;
+                        category[i] = c - 1;
+                        amount[i] = newAmount;
+
+                        printf("Expense updated successfully!\n");
+                    }
+                }
                 break;
-
 
             // DELETE EXPENSE
             case 9:
@@ -344,11 +365,9 @@ int main()
                 printf("Expense deleted successfully!\n");
                 break;
 
-
             case 10:
                 printf("Thank you!\n");
                 break;
-
 
             default:
                 printf("Invalid choice!\n");
