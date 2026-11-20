@@ -5,11 +5,11 @@ Team: Team 08
 
 Team Members
 
-Anurag Rana
+Anurag Rana - 590032955
 
-Ayush Kumar
+Ayush Kumar - 590043117
 
-Tinku
+Tinku - 590042452
 
 ## 📌 Project Overview
 
@@ -169,5 +169,11 @@ Possible improvements for future versions:
 This project was created to practice fundamental C programming concepts through a practical student expense management application.
 
 ---
+
+## 🤖 AI Assistance Disclosure
+
+AI tools were used as a supporting resource during the development of this project. AI assistance was primarily used for understanding C programming concepts, reviewing and improving the code, debugging errors, and preparing project documentation.
+
+The final program was reviewed, tested, and understood by the team members. The project was developed for educational purposes as part of our C programming coursework.
 
 ⭐ If you find this project useful, consider giving the repository a star!
